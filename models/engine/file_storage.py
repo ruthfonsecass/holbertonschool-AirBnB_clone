@@ -1,9 +1,24 @@
 #!/usr/bin/python3
+
+import models
+from models import base_model
+from models import user
+from models import state
+from models import city
+from models import amenity
+from models import place
+from models import review
 import json
+import os
 
 
 class FileStorage:
     """File storage class"""
+
+    classes = {"BaseModel": base_model, "Amenity": amenity,
+                      "City": city, "Place": place,
+                      "Review": review, "State": state, "User": user}
+
     __file_path = "file.json"
     __objects = {}
 
