@@ -15,7 +15,6 @@ class BaseModel:
                             value, "%Y-%m-%dT%H:%M:%S.%f") 
 
   
-
                 elif key != '__class__':
                     setattr(self, key, value)
 
