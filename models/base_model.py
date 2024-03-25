@@ -16,8 +16,7 @@ class BaseModel:
 
   
 
-                if key != '__class__': 
-
+                elif key != '__class__':
                     setattr(self, key, value)
 
         else:           
@@ -31,6 +30,7 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         dictionary = self.__dict__.copy()
