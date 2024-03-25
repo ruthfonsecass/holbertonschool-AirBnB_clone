@@ -38,17 +38,14 @@ class FileStorage:
         classes = {"BaseModel": base_model, "Amenity": amenity,
                 "City": city, "Place": place,
                 "Review": review, "State": state, "User": user}
-        
 
-        try:
-            with open(self.__file_path, "r") as file:
-                serialized_objects = json.load(file)
-                for key, value in serialized_objects.items():
-                    class_name = value[key]["__class__"]
-                    if class_name in classes:
-                        cls = getattr(classes[class_name], class_name)
-                    
+        if not os.path.isfile(self.__file_path):
+            return
+
+        with open(self.__file_path, "r") as file:
+            serialized_objects = json.load(file)
+            for key, value in serialized_objects.items():
+                class_name = value["__class__"]
+                if class_name in classes:
+                    cls = getattr(classes[class_name], class_name)
                     self.__objects[key] = cls(**value)
-
-        except FileNotFoundError:
-            pass
